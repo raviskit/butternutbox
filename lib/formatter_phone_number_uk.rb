@@ -1,7 +1,9 @@
+require 'exceptions/invalid_number_error'
 
 module Formatter
   module PhoneNumber
     module UK
+
       NUMBER_VALIDATOR = /^(\+447\s?\d{9}|447\s?\d{9}|07\s?\d{9})?$/
 
       # Method to format given number in +44 format.
@@ -9,7 +11,7 @@ module Formatter
       # number should be provided as string for matching and formatting.
       def self.format(number)
         number = number.strip.gsub(" ", "") # remove whitespaces
-        raise "Invalid number" if (NUMBER_VALIDATOR =~ number).nil?
+        raise InvalidNumberError if (NUMBER_VALIDATOR =~ number).nil?
 
         leading_number = number[0]
         if leading_number == "4"
